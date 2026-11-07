@@ -7,3 +7,7 @@
 5. Aguarde os deploys, teste `/saude` e envie uma pergunta pela URL pública. Atualize o README com as URLs e com o badge `https://github.com/USUARIO/REPOSITORIO/actions/workflows/ci.yml/badge.svg`, substituindo usuário e repositório. Confira se o workflow está verde.
 
 Serviços gratuitos podem adormecer e demorar a responder. Cotas e elegibilidade variam; confira os painéis do Render e do Google antes do uso. A ativação de serviços e credenciais depende das contas do estudante.
+
+## Alternativa com Blueprint
+
+O arquivo `render.yaml` descreve os dois serviços e configura deploy após os testes passarem. Na criação, informe `GEMINI_API_KEY`, `FRONTEND_ORIGINS` e `API_URL` no painel do Render. Como as URLs públicas ainda não existem antes da criação, use temporariamente URLs HTTPS de exemplo para `FRONTEND_ORIGINS` e `API_URL`, depois substitua-as pelas URLs reais dos serviços e faça um novo deploy dos serviços afetados. A variável `API_URL` é pública e usada durante o build para gerar `frontend/config.js`; a chave Gemini pertence apenas ao backend.

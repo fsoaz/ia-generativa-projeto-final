@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: entrelinhas-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /saude
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.9
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: FRONTEND_ORIGINS
+        sync: false
+  - type: web
+    name: entrelinhas-web
+    runtime: static
+    buildCommand: node frontend/build-config.js
+    staticPublishPath: frontend
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: API_URL
+        sync: false
