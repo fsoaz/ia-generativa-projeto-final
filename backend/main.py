@@ -32,7 +32,7 @@ def gerar_resposta(pergunta: str) -> str:
         raise RuntimeError("GEMINI_API_KEY não configurada")
     client = genai.Client(api_key=chave)
     result = client.models.generate_content(
-        model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
+        model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
         contents="Você é um assistente de estudos. Responda em português de forma clara e didática, usando exemplos quando úteis.\n\nPergunta: " + pergunta,
     )
     if not result.text:
