@@ -4,7 +4,11 @@ Aplicação de perguntas e respostas que usa a API Gemini para explicar assuntos
 
 [![Testes](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml/badge.svg)](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml)
 
-As URLs públicas serão adicionadas após a publicação dos serviços.
+**Aplicação publicada:** [Abrir o Entrelinhas](https://entrelinhas-web-awjs.onrender.com)
+
+**API:** [Verificar saúde](https://entrelinhas-api-awjs.onrender.com/saude)
+
+Consulte [DECISOES.md](DECISOES.md) para conhecer as escolhas técnicas e os aprendizados do projeto.
 
 ## Executar localmente
 
