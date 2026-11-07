@@ -2,7 +2,9 @@
 
 Aplicação de perguntas e respostas que usa a API Gemini para explicar assuntos em português. Projeto final da trilha de DevOps e IA da pós-graduação PUC-PR.
 
-> O badge de CI e as URLs públicas serão adicionados após a criação do repositório remoto e a publicação dos serviços.
+[![Testes](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml/badge.svg)](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml)
+
+As URLs públicas serão adicionadas após a publicação dos serviços.
 
 ## Executar localmente
 
