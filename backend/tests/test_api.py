@@ -26,18 +26,24 @@ def test_falha_provedor(monkeypatch):
     assert 'segredo interno' not in response.text
 
 def test_sem_chave(monkeypatch):
-    monkeypatch.delenv('GEMINI_API_KEY', raising=False)
+    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
     assert client.post('/perguntar', json={'pergunta': 'Teste'}).status_code == 503
 
-def test_servico_gemini(monkeypatch):
-    class Models:
-        def generate_content(self, **kwargs):
-            assert 'Fotossíntese' in kwargs['contents']
-            return type('Result', (), {'text': 'Resposta simulada'})()
-    class Client:
-        def __init__(self, api_key):
-            assert api_key == 'teste'
-            self.models = Models()
-    monkeypatch.setenv('GEMINI_API_KEY', 'teste')
-    monkeypatch.setattr(main.genai, 'Client', Client)
+def test_servico_openrouter(monkeypatch):
+    def post(url, headers, json, timeout):
+        assert url == 'https://openrouter.ai/api/v1/chat/completions'
+        assert headers['Authorization'] == 'Bearer teste'
+        assert json['model'] == 'google/gemini-2.5-flash'
+        assert json['messages'][1]['content'] == 'Fotossíntese'
+        return main.httpx.Response(200, json={'choices': [{'message': {'content': 'Resposta simulada'}}]}, request=main.httpx.Request('POST', url))
+    monkeypatch.setenv('OPENROUTER_API_KEY', 'teste')
+    monkeypatch.delenv('OPENROUTER_MODEL', raising=False)
+    monkeypatch.setattr(main.httpx, 'post', post)
     assert main.gerar_resposta('Fotossíntese') == 'Resposta simulada'
+
+def test_resposta_vazia(monkeypatch):
+    def post(url, **kwargs):
+        return main.httpx.Response(200, json={'choices': [{'message': {'content': ''}}]}, request=main.httpx.Request('POST', url))
+    monkeypatch.setenv('OPENROUTER_API_KEY', 'teste')
+    monkeypatch.setattr(main.httpx, 'post', post)
+    assert client.post('/perguntar', json={'pergunta': 'Teste'}).status_code == 503

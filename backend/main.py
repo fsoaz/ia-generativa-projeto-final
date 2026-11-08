@@ -5,7 +5,7 @@ import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
-from google import genai
+import httpx
 
 logging.basicConfig(level=logging.INFO)
 app = FastAPI(title="Assistente de Estudos")
@@ -27,17 +27,26 @@ class Resposta(BaseModel):
     resposta: str
 
 def gerar_resposta(pergunta: str) -> str:
-    chave = os.getenv("GEMINI_API_KEY")
+    chave = os.getenv("OPENROUTER_API_KEY")
     if not chave:
-        raise RuntimeError("GEMINI_API_KEY não configurada")
-    client = genai.Client(api_key=chave)
-    result = client.models.generate_content(
-        model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
-        contents="Você é um assistente de estudos. Responda em português de forma clara e didática, usando exemplos quando úteis.\n\nPergunta: " + pergunta,
+        raise RuntimeError("OPENROUTER_API_KEY não configurada")
+    response = httpx.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={"Authorization": f"Bearer {chave}"},
+        json={
+            "model": os.getenv("OPENROUTER_MODEL", "google/gemini-2.5-flash"),
+            "messages": [
+                {"role": "system", "content": "Você é um assistente de estudos. Responda em português de forma clara e didática, usando exemplos quando úteis."},
+                {"role": "user", "content": pergunta},
+            ],
+        },
+        timeout=60.0,
     )
-    if not result.text:
+    response.raise_for_status()
+    resposta = response.json()["choices"][0]["message"]["content"]
+    if not isinstance(resposta, str) or not resposta.strip():
         raise RuntimeError("O provedor não retornou texto")
-    return result.text
+    return resposta
 
 @app.get("/saude")
 def saude():

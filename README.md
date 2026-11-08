@@ -1,6 +1,6 @@
 # Entrelinhas — assistente de estudos
 
-Aplicação de perguntas e respostas que usa a API Gemini para explicar assuntos em português. Projeto final da trilha de DevOps e IA da pós-graduação PUC-PR.
+Aplicação de perguntas e respostas que usa o Gemini por meio da OpenRouter para explicar assuntos em português. Projeto final da trilha de DevOps e IA da pós-graduação PUC-PR.
 
 [![Testes](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml/badge.svg)](https://github.com/fsoaz/ia-generativa-projeto-final/actions/workflows/ci.yml)
 
@@ -12,7 +12,7 @@ Consulte [DECISOES.md](DECISOES.md) para conhecer as escolhas técnicas e os apr
 
 ## Executar localmente
 
-Requisitos: Python 3.12 ou superior e uma chave Gemini. Crie e ative um ambiente virtual, depois instale as dependências:
+Requisitos: Python 3.12 ou superior e uma chave OpenRouter. Crie e ative um ambiente virtual, depois instale as dependências:
 
 ```bash
 python3 -m venv .venv

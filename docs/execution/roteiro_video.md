@@ -4,7 +4,7 @@ Adapte o texto às suas palavras e grave uma execução real. Evite mostrar chav
 
 1. **Apresentação e objetivo (40 s):** apresente o Entrelinhas, o problema e o público estudante.
 2. **Aplicação em produção (1 min):** abra a URL pública, envie uma pergunta, mostre a resposta e comente que ela deve ser verificada. Explique que o primeiro acesso pode demorar no plano gratuito.
-3. **Arquitetura e segurança (1 min):** mostre `frontend` e `backend`, explique o caminho navegador → API → Gemini e o armazenamento da chave no Render. Mostre `.env.example` sem revelar segredos.
+3. **Arquitetura e segurança (1 min):** mostre `frontend` e `backend`, explique o caminho navegador → API → OpenRouter → Gemini e o armazenamento da chave no Render. Mostre `.env.example` sem revelar segredos.
 4. **API (1 min):** apresente `GET /saude`, `POST /perguntar`, validação de entrada e tratamento de falha. Mostre a documentação `/docs` da API se estiver disponível.
 5. **Testes e CI/CD (1 min 30 s):** explique o mock, execute os testes se possível e mostre o resultado de cobertura, o workflow verde e o badge no README. Explique que o Render publica a partir do repositório.
 6. **Decisões e aprendizados (1 min):** explique as escolhas de stack, os desafios de deploy e modelo e os aprendizados descritos em `DECISOES.md`.
